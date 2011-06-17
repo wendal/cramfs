@@ -142,10 +142,10 @@ static void test_super(int *start, size_t *length) {
 		die(FSCK_ERROR, 1, "open failed: %s", filename);
 	}
 	if (S_ISBLK(st.st_mode)) {
-		if (ioctl(fd, BLKGETSIZE, length) < 0) {
-			die(FSCK_ERROR, 1, "ioctl failed: unable to determine device size: %s", filename);
-		}
-		*length = *length * 512;
+		//if (ioctl(fd, BLKGETSIZE, length) < 0) {
+		//	die(FSCK_ERROR, 1, "ioctl failed: unable to determine device size: %s", filename);
+		//}
+		//*length = *length * 512;
 	}
 	else if (S_ISREG(st.st_mode)) {
 		*length = st.st_size;
