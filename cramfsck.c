@@ -107,7 +107,9 @@ static struct cramfs_inode *Vi;
 static void usage(int status)
 {
 	FILE *stream = status ? stderr : stdout;
-
+    printf("Cramfs 2 , Modify by Wendal Chen.\n");
+    printf("My blog    http://wendal.net\n");
+    printf("Sources    http://github.org/wendal/cramfs\n\n");
 	fprintf(stream, "usage: %s [-hv] [-x dir] file\n"
 		" -h         print this help\n"
 		" -x dir     extract into dir\n"
@@ -282,7 +284,7 @@ static struct cramfs_inode *read_super(void)
 
 static int uncompress_block(void *src, int len)
 {
-	int err;
+	//int err;
 
 	stream.next_in = src;
 	stream.avail_in = len;
@@ -296,8 +298,9 @@ static int uncompress_block(void *src, int len)
 		//die(FSCK_UNCORRECTED, 0, "data block too large");
         print_node('f', Vi, Vpath);
         printf("  data block too large!!! Skip!!\n");
-	}
-	err = inflate(&stream, Z_FINISH);
+	} else {
+	    inflate(&stream, Z_FINISH);
+    }
 	//if (err != Z_STREAM_END) {
 	//	die(FSCK_UNCORRECTED, 0, "decompression error %p(%d): %s",
 	//	    zError(err), src, len);

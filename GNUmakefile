@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -W -Wall -O2 -g
+CFLAGS = -W -Wall -O2
 CPPFLAGS = -I.
 LDLIBS = -lz
 PROGS = mkcramfs cramfsck
