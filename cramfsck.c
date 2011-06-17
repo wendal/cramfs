@@ -99,6 +99,10 @@ static z_stream stream;
 static void expand_fs(char *, struct cramfs_inode *);
 #endif /* INCLUDE_FS_TESTS */
 
+/* add by wendal*/
+static char *Vpath;
+static struct cramfs_inode *Vi;
+
 /* Input status of 0 to print help and exit without an error. */
 static void usage(int status)
 {
@@ -348,13 +352,15 @@ static int uncompress_block(void *src, int len)
 	inflateReset(&stream);
 
 	if (len > PAGE_CACHE_SIZE*2) {
-		die(FSCK_UNCORRECTED, 0, "data block too large");
+		//die(FSCK_UNCORRECTED, 0, "data block too large");
+        print_node('f', Vi, Vpath);
+        printf("  data block too large!!! Skip!!\n");
 	}
 	err = inflate(&stream, Z_FINISH);
-	if (err != Z_STREAM_END) {
-		die(FSCK_UNCORRECTED, 0, "decompression error %p(%d): %s",
-		    zError(err), src, len);
-	}
+	//if (err != Z_STREAM_END) {
+	//	die(FSCK_UNCORRECTED, 0, "decompression error %p(%d): %s",
+	//	    zError(err), src, len);
+	//}
 	return stream.total_out;
 }
 
@@ -387,7 +393,8 @@ static void do_uncompress(char *path, int fd, unsigned long offset, unsigned lon
 		}
 		if (size >= PAGE_CACHE_SIZE) {
 			if (out != PAGE_CACHE_SIZE) {
-				die(FSCK_UNCORRECTED, 0, "non-block (%ld) bytes", out);
+				//die(FSCK_UNCORRECTED, 0, "non-block (%ld) bytes", out);
+                break;
 			}
 		} else {
 			if (out != size) {
@@ -503,6 +510,12 @@ static void do_file(char *path, struct cramfs_inode *i)
 	if (offset != 0 && offset < start_data) {
 		start_data = offset;
 	}
+
+    //Add by wendal
+    Vpath = path;
+    Vi    = i;
+    //End
+
 	if (opt_verbose) {
 		print_node('f', i, path);
 	}
