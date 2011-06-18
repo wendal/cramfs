@@ -107,9 +107,6 @@ static struct cramfs_inode *Vi;
 static void usage(int status)
 {
 	FILE *stream = status ? stderr : stdout;
-    printf("Cramfs 2 , Modify by Wendal Chen.\n");
-    printf("My blog    http://wendal.net\n");
-    printf("Sources    http://github.com/wendal/cramfs\n\n");
 	fprintf(stream, "usage: %s [-hv] [-x dir] file\n"
 		" -h         print this help\n"
 		" -x dir     extract into dir\n"
@@ -620,6 +617,10 @@ int main(int argc, char **argv)
 
 	if (argc)
 		progname = argv[0];
+
+    printf("Cramfs 2 , Modify by Wendal Chen.\n");
+    printf("My blog    http://wendal.net\n");
+    printf("Sources    http://github.com/wendal/cramfs\n\n");
 
 	/* command line options */
 	while ((c = getopt(argc, argv, "hx:v")) != EOF) {
