@@ -651,9 +651,9 @@ int main(int argc, char **argv)
 	test_fs(start);
 #endif /* INCLUDE_FS_TESTS */
 
-	if (opt_verbose) {
+	//if (opt_verbose) {
 		printf("%s: OK\n", filename);
-	}
+	//}
 
 	exit(FSCK_OK);
 }
